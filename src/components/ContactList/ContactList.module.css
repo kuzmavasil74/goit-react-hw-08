@@ -1,0 +1,42 @@
+.contactListMainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 250px;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1.5px solid rgba(6, 44, 237, 0.652);
+  border-radius: 10px;
+}
+.contactCart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  min-width: 250px;
+  height: auto;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1.5px solid rgba(6, 44, 237, 0.652);
+  border-radius: 10px;
+}
+.contactList {
+  margin-left: 5px;
+}
+.contactListItem {
+  font-size: medium;
+  line-height: 1.5;
+}
+.cantactListBtn {
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 7px;
+}
+.color {
+  width: 20px;
+  height: 20px;
+  margin-right: 7px;
+}

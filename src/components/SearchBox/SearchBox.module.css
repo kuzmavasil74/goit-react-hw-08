@@ -1,0 +1,11 @@
+.searchBoxTitle {
+  font-size: 10px;
+  font-weight: normal;
+  margin-bottom: 5px;
+  padding-top: 5px;
+}
+.searchBoxInput {
+  border: 1.5px solid rgba(36, 37, 37, 0.456);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}

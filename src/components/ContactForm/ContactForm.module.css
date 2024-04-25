@@ -1,0 +1,37 @@
+.contactForm {
+  padding: 10px;
+  width: 250px;
+  border: 1.5px solid rgba(44, 92, 58, 0.656);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.contactForm label span {
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 5px;
+}
+.contactFormInput {
+  width: 230px;
+  border: 1.5px solid rgb(126, 23, 23);
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+.contactFormBtn {
+  display: block;
+  width: 50%;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.greenColor {
+  color: greenyellow;
+}
+.redColor {
+  color: red;
+}
+.blueColor {
+  color: blue;
+}
+.orangeColor {
+  color: orange;
+}
