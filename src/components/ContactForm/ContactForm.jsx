@@ -7,7 +7,7 @@ import {
   min_name_length,
   min_number_length,
 } from '../../utils/constants'
-import { addContact } from '../../redux/contactsOps'
+import { addContact } from '../../redux/contacts/operations'
 import { useDispatch } from 'react-redux'
 import { nanoid } from 'nanoid'
 
