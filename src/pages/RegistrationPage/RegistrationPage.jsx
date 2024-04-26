@@ -3,6 +3,8 @@ import * as Yup from 'yup'
 
 import css from './RegistrationPage.module.css'
 import { max_name_length, min_name_length } from '../../utils/constants'
+import { useDispatch } from 'react-redux'
+import { register } from '../../redux/auth/slice'
 
 const RegistrationUserSchema = Yup.object({
   name: Yup.string()
@@ -27,9 +29,11 @@ const form_Initial_Values = {
 }
 
 const RegistrationPage = () => {
+  const dispatch = useDispatch()
+
   const handleSubmitEvent = (values, actions) => {
     console.log(values)
-    // onAddContact(values)
+    dispatch(register(values))
     actions.resetForm()
   }
   return (
