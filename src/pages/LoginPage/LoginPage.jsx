@@ -2,6 +2,8 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 
 import css from './LoginPage.module.css'
+import { login } from '../../redux/auth/slice'
+import { useDispatch } from 'react-redux'
 
 const RegistrationUserSchema = Yup.object({
   email: Yup.string()
@@ -17,9 +19,10 @@ const form_Initial_Values = {
 }
 
 const LoginPage = () => {
+  const dispatch = useDispatch()
+
   const handleSubmitEvent = (values, actions) => {
-    console.log(values)
-    // onAddContact(values)
+    dispatch(login(values))
     actions.resetForm()
   }
   return (

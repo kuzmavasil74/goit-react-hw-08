@@ -21,6 +21,21 @@ export const register = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const { data } = await instance.post('/users/signup', formData)
+      console.log(data)
+      return data
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message)
+    }
+  }
+)
+
+export const login = createAsyncThunk(
+  'auth/login',
+  async (formData, thunkAPI) => {
+    try {
+      const { data } = await instance.post('/users/login', formData)
+      setToken(data.token)
+      //   console.log(data)
       return data
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message)
@@ -44,6 +59,38 @@ const authSlice = createSlice({
   //Початкове значення стану
   initialState: INITIAL_STATE,
   // Ініціалізація редюсера
+  extraReducers: (builder) => {
+    builder
+      .addCase(register.pending, (state) => {
+        state.isLoading = true
+        state.isError = false
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSignedIn = true
+        state.userData = action.payload.user
+        state.token = action.payload.token
+      })
+      .addCase(register.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+      })
+
+      .addCase(login.pending, (state) => {
+        state.isLoading = true
+        state.isError = false
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSignedIn = true
+        state.userData = action.payload.user
+        state.token = action.payload.token
+      })
+      .addCase(login.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+      })
+  },
 })
 
 export const authSliceReducer = authSlice.reducer
