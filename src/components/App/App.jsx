@@ -12,7 +12,7 @@ const ContactsPage = lazy(() => import('../../pages/ContactsPage/ContactsPage'))
 
 import Layout from '../Layout/Layout'
 import Loader from '../Loader/Loader'
-import { refreshUser } from '../../redux/auth/slice'
+import { refreshUser } from '../../redux/auth/operations'
 
 function App() {
   const dispatch = useDispatch()

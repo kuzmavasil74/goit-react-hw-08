@@ -24,7 +24,7 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    contacts: contactSliceReducer, //Конфігурація слайсу
+    contact: contactSliceReducer, //Конфігурація слайсу
     filter: filterSliceReducer, // Конфігурація слайсу
     auth: persistReducer(authPersistConfig, authSliceReducer), //Конфігурація слайсу
   },
