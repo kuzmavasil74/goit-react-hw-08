@@ -43,6 +43,23 @@ export const login = createAsyncThunk(
   }
 )
 
+export const refreshUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState()
+      const token = state.auth.token
+
+      setToken(token)
+      const { data } = await instance.get('/users/current')
+      console.log('refresh', data)
+      return data
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message)
+    }
+  }
+)
+
 const INITIAL_STATE = {
   isSignedIn: false,
   userData: null,
