@@ -107,6 +107,20 @@ const authSlice = createSlice({
         state.isLoading = false
         state.isError = true
       })
+
+      .addCase(refreshUser.pending, (state) => {
+        state.isLoading = true
+        state.isError = false
+      })
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSignedIn = true
+        state.userData = action.payload
+      })
+      .addCase(refreshUser.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+      })
   },
 })
 
