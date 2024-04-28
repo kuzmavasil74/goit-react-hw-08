@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { Routes, Route } from 'react-router-dom'
 import { Suspense, lazy, useEffect } from 'react'
-import { fetchContacts } from '../../redux/contacts/operations'
+import { apiGetContacts } from '../../redux/contacts/operations'
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'))
 const RegistrationPage = lazy(() =>
@@ -24,7 +24,7 @@ function App() {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(fetchContacts())
+    dispatch(apiGetContacts())
   }, [dispatch])
 
   return (

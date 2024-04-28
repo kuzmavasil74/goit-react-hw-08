@@ -1,43 +1,40 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { instance } from '../auth/operations'
 
-const instance = axios.create({
-  baseURL: 'https://6622cb103e17a3ac846dfbd6.mockapi.io/', //адреса бекенда за замовчуванням
-})
-
-export const fetchContacts = createAsyncThunk(
-  'contacts/fetchAll',
-  async (_, thunkAPI) => {
+export const apiGetContacts = createAsyncThunk(
+  'contacts/getAll',
+  async (_, thunkApi) => {
     try {
-      const response = await instance.get('/contacts')
-      return response.data
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message)
+      const { data } = await instance.get('/contacts')
+      console.log('data GetContacts: ', data)
+      return data
+    } catch (e) {
+      return thunkApi.rejectWithValue(e.message)
+    }
+  }
+)
+export const apiAddContacts = createAsyncThunk(
+  'contacts/addNew',
+  async (formData, thunkApi) => {
+    try {
+      const { data } = await instance.post('/contacts', formData)
+      // console.log('data AddContacts: ', data)
+      return data
+    } catch (e) {
+      return thunkApi.rejectWithValue(e.message)
     }
   }
 )
 
-export const addContact = createAsyncThunk(
-  'contacts/addContacts',
-  async (contact, thunkAPI) => {
+export const apiDeleteContacts = createAsyncThunk(
+  'contacts/delete',
+  async (contactId, thunkApi) => {
     try {
-      const response = await instance.post('/contacts', contact)
-      return response.data
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message)
-    }
-  }
-)
-
-export const deleteContact = createAsyncThunk(
-  'contacts/deleteContacts',
-  async (contactId, thunkAPI) => {
-    try {
-      const response = await instance.delete(`/contacts/${contactId}`)
-      // console.log(response.data)
-      return response.data
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message)
+      const { data } = await instance.delete(`/contacts/${contactId}`)
+      // console.log('data DeleteContacts: ', data)
+      return data
+    } catch (e) {
+      return thunkApi.rejectWithValue(e.message)
     }
   }
 )

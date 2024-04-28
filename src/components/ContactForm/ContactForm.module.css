@@ -18,10 +18,16 @@
 }
 .contactFormBtn {
   display: block;
-  width: 50%;
+  width: 80%;
   margin-top: 5px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 5px;
+}
+.contactFormBtn:hover {
+  color: rgb(126, 23, 23);
+  background-color: rgba(44, 92, 58, 0.656);
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
 }
 .greenColor {
   color: greenyellow;

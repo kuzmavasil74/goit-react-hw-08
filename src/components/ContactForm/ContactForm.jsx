@@ -1,76 +1,68 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
-import css from './ContactForm.module.css'
 import * as Yup from 'yup'
-import {
-  max_name_length,
-  max_number_length,
-  min_name_length,
-  min_number_length,
-} from '../../utils/constants'
-import { addContact } from '../../redux/contacts/operations'
-import { useDispatch } from 'react-redux'
-import { nanoid } from 'nanoid'
 
-const contactFormSchema = Yup.object({
-  name: Yup.string()
-    .required('Name is required!')
-    .matches(
-      /^[a-zA-Zа-яА-ЯіІїЇєЄґҐ\s]+$/,
-      'Name can only contain letters and spaces'
-    )
-    .min(min_name_length, 'Name must be at least 3 characters')
-    .max(max_name_length, 'Name cannot be longer than 50 characters'),
+import { useDispatch } from 'react-redux'
+import { apiAddContacts } from '../../redux/contacts/operations'
+import css from './ContactForm.module.css'
+const AddContactsSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required!'),
+
   number: Yup.string()
-    .min(min_number_length, 'Number must be at least 3 characters')
-    .matches(/^[-+\d() ]+$/, 'Invalid phone number format')
-    .max(
-      max_number_length,
-      'Contact telephone number cannot be longer than 50 characters'
+    .required('User number is required!')
+    .matches(
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+      'You must enter valid phone number!'
     ),
 })
 
-const form_Initial_Values = {
+const FORM_INITIAL_VALUES = {
   name: '',
   number: '',
 }
+
 const ContactForm = () => {
   const dispatch = useDispatch()
-  const onAddContact = (formData) => {
-    const finalContact = {
-      ...formData,
-      id: nanoid(),
-    }
-    const action = addContact(finalContact)
-    dispatch(action)
-  }
-  const handleSubmitEvent = (values, actions) => {
-    onAddContact(values)
+
+  const handleSubmit = (values, actions) => {
+    dispatch(apiAddContacts(values))
+    console.log('values: ', values)
     actions.resetForm()
   }
   return (
     <div>
       <Formik
-        initialValues={form_Initial_Values}
-        validationSchema={contactFormSchema}
-        onSubmit={handleSubmitEvent}
+        initialValues={FORM_INITIAL_VALUES}
+        validationSchema={AddContactsSchema}
+        onSubmit={handleSubmit}
       >
         <Form className={css.contactForm}>
+          {/* <h2>Add new user contact</h2> */}
           <label>
-            <span>Name</span>
+            <span>Contact name:</span>
             <br />
-            <Field className={css.contactFormInput} type="text" name="name" />
+            <Field
+              className={css.contactFormInput}
+              type="text"
+              name="name"
+              placeholder="John Doe"
+            />
             <ErrorMessage component="p" name="name" />
-          </label>
+          </label>{' '}
           <br />
           <label>
-            <span>Number</span>
+            <span>Contact number:</span>
             <br />
-            <Field className={css.contactFormInput} type="tel" name="number" />
+            <Field
+              className={css.contactFormInput}
+              type="number"
+              name="number"
+              placeholder="+380123456789"
+            />
             <ErrorMessage component="p" name="number" />
-          </label>
-
+          </label>{' '}
+          <br />
           <button className={css.contactFormBtn} type="submit">
-            Add contact
+            ▶ Add new contact
           </button>
         </Form>
       </Formik>

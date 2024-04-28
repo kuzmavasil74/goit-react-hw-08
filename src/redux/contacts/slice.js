@@ -1,75 +1,65 @@
-import { createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit'
-import { fetchContacts, addContact, deleteContact } from './operations'
-import { selectFilter } from '../filters/selectors'
-import { selectContact } from './selectors'
+import { createSlice, isAnyOf } from '@reduxjs/toolkit'
+import { apiAddContacts, apiDeleteContacts, apiGetContacts } from './operations'
 
-const contactSlice = createSlice({
-  name: 'contact',
-  initialState: {
-    contacts: {
-      items: [],
-      loading: false,
-      error: null,
-    },
-  },
+const INITIAL_STATE = {
+  contacts: [],
+  isLoading: false,
+  isError: false,
+}
+
+const contactsSlice = createSlice({
+  // Ім'я слайсу
+  name: 'contacts',
+  // Початковий стан редюсера слайсу
+  initialState: INITIAL_STATE,
+  // Об'єкт редюсерів
   extraReducers: (builder) => {
     builder
 
-      .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.contacts.items = action.payload
-        state.contacts.loading = false
+      //getContacts
+
+      .addCase(apiGetContacts.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.contacts = action.payload
       })
 
-      .addCase(addContact.fulfilled, (state, action) => {
-        state.contacts.items.push(action.payload)
-        state.contacts.loading = false
+      //  addContacts
+      .addCase(apiAddContacts.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.contacts.push(action.payload)
       })
 
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        state.contacts.items = state.contacts.items.filter(
+      //  deleteContacts
+      .addCase(apiDeleteContacts.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.contacts = state.contacts.filter(
           (contact) => contact.id !== action.payload.id
         )
-        state.contacts.loading = false
       })
 
       .addMatcher(
         isAnyOf(
-          fetchContacts.pending,
-          addContact.pending,
-          deleteContact.pending
+          apiGetContacts.pending,
+          apiAddContacts.pending,
+          apiDeleteContacts.pending
         ),
         (state) => {
-          state.contacts.loading = true
-          state.contacts.error = null
+          state.isLoading = true
+          state.isError = false
         }
       )
-
       .addMatcher(
         isAnyOf(
-          fetchContacts.rejected,
-          addContact.rejected,
-          deleteContact.rejected
+          apiGetContacts.rejected,
+          apiAddContacts.rejected,
+          apiDeleteContacts.rejected
         ),
         (state) => {
-          state.contacts.loading = false
-          state.contacts.error = 'Something went wrong'
+          state.isLoading = false
+          state.isError = true
         }
       )
   },
 })
 
-export const contactSliceReducer = contactSlice.reducer
-
-export const {
-  addContact: addContactAction,
-  deleteContact: deleteContactAction,
-} = contactSlice.actions
-
-export const selectFilteredContacts = createSelector(
-  [selectContact, selectFilter],
-  (contacts, filters) => {
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filters.toLowerCase())
-    )
-  }
-)
+export const contactsReducer = contactsSlice.reducer

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import { contactSliceReducer } from './contacts/slice'
+import { contactsReducer } from './contacts/slice'
 import { filterSliceReducer } from './filters/slice'
 import { authSliceReducer } from './auth/slice'
 
@@ -24,9 +24,9 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    contact: contactSliceReducer, //Конфігурація слайсу
-    filter: filterSliceReducer, // Конфігурація слайсу
-    auth: persistReducer(authPersistConfig, authSliceReducer), //Конфігурація слайсу
+    phonebook: contactsReducer, //Конфігурація слайсу контактів
+    filter: filterSliceReducer, // Конфігурація слайсу фільтрації
+    auth: persistReducer(authPersistConfig, authSliceReducer), //Конфігурація слайсу авторизації
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
