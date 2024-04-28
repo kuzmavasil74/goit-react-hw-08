@@ -15,7 +15,7 @@ const Navigation = () => {
     dispatch(logout())
   }
   return (
-    <div>
+    <div className={css.navNavigation}>
       {' '}
       <NavLink className={getNavLinkClassName} to="/">
         Home
@@ -24,8 +24,8 @@ const Navigation = () => {
         Contacts
       </NavLink>
       <div>
-        <span> Hello, {userData.name} </span>
-        <button type="button" onClick={handelLogout}>
+        <span className={css.navLinkUserName}> Hello, {userData.name} </span>
+        <button className={css.navLinkBtn} type="button" onClick={handelLogout}>
           Log out
         </button>
       </div>

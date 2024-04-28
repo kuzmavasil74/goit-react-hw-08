@@ -7,7 +7,7 @@ import css from './AuthNav.module.css'
 import clsx from 'clsx'
 const AuthNav = () => {
   return (
-    <div>
+    <div className={css.navAuth}>
       <NavLink className={getNavLinkClassName} to="/register">
         Register
       </NavLink>

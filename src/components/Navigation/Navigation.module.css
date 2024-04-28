@@ -1,3 +1,6 @@
+.navLink:hover {
+  color: rgb(187, 224, 185);
+}
 .nav {
   display: flex;
   align-items: center;
@@ -7,12 +10,42 @@
 .navLink {
   display: flex;
   padding: 15px 20px;
-  border: 1px solid blue;
+
   color: blue;
   text-decoration: none;
 }
 a.active {
-  border: 1px solid red;
-  color: red;
+  color: rgb(162, 49, 49);
   text-decoration: none;
+}
+.navNavigation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  justify-content: start;
+  width: 100%;
+}
+
+.navNavigation > :last-child {
+  margin-left: auto;
+}
+.navLinkUserName {
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 10px;
+  color: rgba(3, 3, 72, 0.596);
+}
+
+.navLinkBtn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: rgb(179, 179, 179);
+  cursor: pointer;
+  margin-left: 10px;
+}
+.navLinkBtn:hover {
+  background-color: yellowgreen;
+  color: red;
+  border-color: chartreuse;
 }

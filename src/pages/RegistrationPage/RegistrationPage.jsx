@@ -36,7 +36,7 @@ const RegistrationPage = () => {
     actions.resetForm()
   }
   return (
-    <div>
+    <div className={css.registrationContainer}>
       <Formik
         initialValues={form_Initial_Values}
         validationSchema={RegistrationUserSchema}

@@ -28,7 +28,7 @@ function App() {
   }, [dispatch])
 
   return (
-    <>
+    <div>
       <Layout>
         <Suspense fallback={<Loader />}>
           <Routes>
@@ -63,7 +63,7 @@ function App() {
           </Routes>
         </Suspense>
       </Layout>
-    </>
+    </div>
   )
 }
 

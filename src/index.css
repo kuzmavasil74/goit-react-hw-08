@@ -45,3 +45,10 @@ a {
 button {
   cursor: pointer;
 }
+body {
+  height: 100vh;
+  background-image: url(./assets/image/7857d629d5c61e7a78441ac2e525d810.jpg);
+  background-size: 2000px;
+  background-position-x: center;
+  background-position-y: center;
+}

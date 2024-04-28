@@ -1,5 +1,15 @@
 a.active {
-  border: 1px solid red;
   color: red;
   text-decoration: none;
+}
+.navAuth {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 20px;
+  align-items: center;
+  margin-top: 100px;
+  padding: 15px;
+
+  justify-content: center;
+  font-size: x-large;
 }

@@ -12,13 +12,7 @@ const Contact = ({ contact }) => {
   return (
     <li className={css.contactCart}>
       <ul className={css.contactList}>
-        <li className={css.contactListItem}>
-          <div
-            style={{ backgroundColor: contact.favColor || 'defaultColor' }}
-            className={css.color}
-          />
-          👨‍🦱 {contact.name}
-        </li>
+        <li className={css.contactListItem}>👨‍🦱 {contact.name}</li>
 
         <li className={css.contactListItem}>☎️ {contact.number}</li>
       </ul>

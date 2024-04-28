@@ -18,11 +18,7 @@ const ContactList = () => {
   return (
     <ul className={css.contactListMainContainer}>
       {selectContacts.map((contact) => (
-        <Contact
-          key={contact.id}
-          contact={contact}
-          favColor={contact.favColor}
-        />
+        <Contact key={contact.id} contact={contact} />
       ))}
     </ul>
   )
