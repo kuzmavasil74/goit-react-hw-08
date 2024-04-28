@@ -13,6 +13,8 @@ const ContactsPage = lazy(() => import('../../pages/ContactsPage/ContactsPage'))
 import Layout from '../Layout/Layout'
 import Loader from '../Loader/Loader'
 import { refreshUser } from '../../redux/auth/operations'
+import RestrictedRoute from '../RestrictedRoute/RestrictedRoute'
+import PrivateRoute from '../PrivateRoute/PrivateRoute'
 
 function App() {
   const dispatch = useDispatch()
@@ -32,9 +34,30 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
 
-            <Route path="/register" element={<RegistrationPage />}></Route>
-            <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/contacts" element={<ContactsPage />}></Route>
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute>
+                  <RegistrationPage />
+                </RestrictedRoute>
+              }
+            ></Route>
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute>
+                  <LoginPage />
+                </RestrictedRoute>
+              }
+            ></Route>
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute>
+                  <ContactsPage />
+                </PrivateRoute>
+              }
+            ></Route>
 
             <Route path="*" element={<HomePage />}></Route>
           </Routes>

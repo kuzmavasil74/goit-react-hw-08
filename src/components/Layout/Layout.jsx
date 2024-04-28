@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 
 const Layout = ({ children }) => {
   const isSignedIn = useSelector(selectIsSignedIn)
+
   return (
     <div>
       <AppBar isSignedIn={isSignedIn} />
