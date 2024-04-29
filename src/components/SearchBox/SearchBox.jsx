@@ -6,13 +6,14 @@ import css from './SearchBox.module.css'
 
 const SearchBox = () => {
   const selectNameFilter = useSelector((state) => {
-    state.filter.name
+    console.log('selectNameFilter: ', state)
+    return state.filter.name
   })
   const dispatch = useDispatch()
   const id = useId()
 
   const handelInputSearch = (evt) => {
-    dispatch(changeFilter(evt.target.value))
+    dispatch(changeFilter({ name: evt.target.value }))
   }
   return (
     <div>

@@ -12,6 +12,7 @@ import Loader from '../../components/Loader/Loader'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { useDispatch, useSelector } from 'react-redux'
 import Contact from '../Contacts/Contact'
+import { selectFilteredContacts } from '../../redux/filters/slice'
 const ContactList = () => {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -21,6 +22,8 @@ const ContactList = () => {
   const isLoading = useSelector(selectPhonebookIsLoading)
   const isError = useSelector(selectPhonebookIsError)
   const contacts = useSelector(selectPhonebookContacts)
+  const filteredContacts = useSelector(selectFilteredContacts)
+  console.log('filteredContacts: ', filteredContacts)
 
   const onDeleteContact = (contactId) => {
     dispatch(apiDeleteContacts(contactId))
@@ -35,7 +38,7 @@ const ContactList = () => {
           <li>You don&apos;t have any registered contacts yet</li>
         )}
         {Array.isArray(contacts) &&
-          contacts.map((item) => (
+          filteredContacts.map((item) => (
             <Contact
               key={item.id}
               item={item}
